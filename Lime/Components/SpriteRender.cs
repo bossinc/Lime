@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lime
 {
-    class Transform
+    class SpriteRender : Component
     {
     }
 }

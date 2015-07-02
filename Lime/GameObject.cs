@@ -6,35 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class GameObject
+    class GameObject : BaseObject
     {
         #region Properties
-
-        private int _id;
-        public int id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-
-        private bool _active;
-        public bool active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
-        }
 
         private string _tag;
         public string tag
@@ -76,11 +50,15 @@ namespace Lime
         }
 
         private List<Component> _components;
-        public List<Component> Components
+        private List<Component> components
         {
             get
             {
                 return _components;
+            }
+            set
+            {
+                this._components = value;
             }
         }
 
@@ -90,46 +68,92 @@ namespace Lime
 
         public GameObject()
         {
+            this.transform = new Transform(Vector2.Zero);
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
+ 	        throw new NotImplementedException();
         }
 
-        public void Destroy()
+        private void Destroy()
         {
+            GameManager.instance.RemoveGameObject(this);
         }
 
-        public void Instantiate()
+        /// <summary>
+        /// Adds this GameObject to the singeton of GameManager
+        /// </summary>
+        public void Instantiate(GameObject gameObject, Vector2 postion)
         {
+            SetId();
+            this.transform.position = postion;
+            GameManager.instance.AddGameObject(this);
         }
 
-        public GameObject Find(string name)
+        /// <summary>
+        /// Finds every GameObject with name.
+        /// </summary>
+        /// <param name="name">name of the GameObjects to be found</param>
+        /// <returns>List of GameObjects found. If none returns a null</returns>
+        public static List<GameObject> Find(string name)
         {
+            return GameManager.instance.FindGameObjectsName(name);
+        }
+
+        /// <summary>
+        /// Finds every GameObject with tag.
+        /// </summary>
+        /// <param name="tag">tag of the GameObjects to be found</param>
+        /// <returns>List of GameObjects found. If not found returns null</returns>
+        public static List<GameObject> FindWithTag(string tag)
+        {
+            return GameManager.instance.FindGameObjectsTag(tag);
+        }
+
+        /// <summary>
+        /// Gets the component that is T class
+        /// </summary>
+        /// <typeparam name="T">The type of component</typeparam>
+        /// <returns>Returns found componet. If not found returns null</returns>
+        public Component GetComponent<T>()
+        {
+            foreach (Component component in this.components)
+            {
+                if (component is T)
+                    return component;
+            }
             return null;
         }
 
-        public GameObject FindWithTag(string tag)
+        public Component GetComponent(int id)
         {
+            foreach (Component component in this.components)
+            {
+                if (component.instanceId == id)
+                    return component;
+            }
             return null;
         }
 
-        public Component GetComponet<T>()
+        /// <summary>
+        /// Adds component to the list of components
+        /// </summary>
+        /// <param name="component">Component to be added</param>
+        public void AddComponent(Component component)
         {
-            return null;
+            this.components.Add(component);
         }
 
+        public void DestroyComponent(Component component)
+        {
+            this.components.Remove(component);
+        }
 
         #endregion Methods
-
-        #region Events
-
-
-        #endregion Events
     }
 }
