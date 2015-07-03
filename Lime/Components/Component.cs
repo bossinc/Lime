@@ -12,7 +12,7 @@ namespace Lime
         /// The assocated GameObject.
         /// This GameObject will have this Component as a member.
         /// </summary>
-        public GameObject gameObject
+        public GameObject GameObject
         {
             get
             {

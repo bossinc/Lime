@@ -9,7 +9,7 @@ namespace Lime
     abstract class BaseObject
     {
         private static int _idIndexer = 0;
-        private static int idIndexer
+        private static int IdIndexer
         {
             get
             {
@@ -18,7 +18,7 @@ namespace Lime
         }
 
         private int _instanceId;
-        public int instanceId
+        public int InstanceId
         {
             get
             {
@@ -31,7 +31,7 @@ namespace Lime
         }
 
         private bool _enabled;
-        public bool enabled
+        public bool Enabled
         {
             get
             {
@@ -56,7 +56,7 @@ namespace Lime
 
         protected void SetId()
         {
-            this.instanceId = idIndexer;
+            this.InstanceId = IdIndexer;
         }
 
         public void Destroy(BaseObject baseObject, double waitTime)
@@ -69,7 +69,7 @@ namespace Lime
                 }
                 else if (baseObject is GameObject)
                 {
-                    GameManager.instance.RemoveGameObject((GameObject)baseObject);
+                    GameManager.Instance.RemoveGameObject((GameObject)baseObject);
                 }
                 else
                 {

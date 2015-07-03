@@ -11,7 +11,7 @@ namespace Lime
         #region Properties
 
         private string _tag;
-        public string tag
+        public string Tag
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Lime
         }
 
         private Transform _transform;
-        public Transform transform
+        public Transform Transform
         {
             get
             {
@@ -37,7 +37,7 @@ namespace Lime
         }
 
         private string _name;
-        public string name
+        public string Name
         {
             get
             {
@@ -50,7 +50,7 @@ namespace Lime
         }
 
         private List<Component> _components;
-        private List<Component> components
+        private List<Component> Components
         {
             get
             {
@@ -68,7 +68,7 @@ namespace Lime
 
         public GameObject()
         {
-            this.transform = new Transform(Vector2.Zero);
+            this.Transform = new Transform(Vector2.Zero);
         }
 
         #endregion Constructors
@@ -82,7 +82,7 @@ namespace Lime
 
         private void Destroy()
         {
-            GameManager.instance.RemoveGameObject(this);
+            GameManager.Instance.RemoveGameObject(this);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Lime
         public void Instantiate(GameObject gameObject, Vector2 postion)
         {
             SetId();
-            this.transform.position = postion;
-            GameManager.instance.AddGameObject(this);
+            this.Transform.Position = postion;
+            GameManager.Instance.AddGameObject(this);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Lime
         /// <returns>List of GameObjects found. If none returns a null</returns>
         public static List<GameObject> Find(string name)
         {
-            return GameManager.instance.FindGameObjectsName(name);
+            return GameManager.Instance.FindGameObjectsName(name);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Lime
         /// <returns>List of GameObjects found. If not found returns null</returns>
         public static List<GameObject> FindWithTag(string tag)
         {
-            return GameManager.instance.FindGameObjectsTag(tag);
+            return GameManager.Instance.FindGameObjectsTag(tag);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Lime
         /// <returns>Returns found componet. If not found returns null</returns>
         public Component GetComponent<T>()
         {
-            foreach (Component component in this.components)
+            foreach (Component component in this.Components)
             {
                 if (component is T)
                     return component;
@@ -132,9 +132,9 @@ namespace Lime
 
         public Component GetComponent(int id)
         {
-            foreach (Component component in this.components)
+            foreach (Component component in this.Components)
             {
-                if (component.instanceId == id)
+                if (component.InstanceId == id)
                     return component;
             }
             return null;
@@ -146,12 +146,12 @@ namespace Lime
         /// <param name="component">Component to be added</param>
         public void AddComponent(Component component)
         {
-            this.components.Add(component);
+            this.Components.Add(component);
         }
 
         public void DestroyComponent(Component component)
         {
-            this.components.Remove(component);
+            this.Components.Remove(component);
         }
 
         #endregion Methods

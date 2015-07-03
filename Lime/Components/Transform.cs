@@ -10,7 +10,7 @@ namespace Lime
     {
         #region Properties
         private Vector2 _position;
-        public Vector2 position
+        public Vector2 Position
         {
             get
             {
@@ -23,7 +23,7 @@ namespace Lime
         }
 
         private float _rotation;
-        public float rotation
+        public float Rotation
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Lime
         }
 
         private Vector2 _scale;
-        public Vector2 scale
+        public Vector2 Scale
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Lime
         }
 
         private Transform _parent;
-        public Transform parent
+        public Transform Parent
         {
             get
             {
@@ -62,7 +62,7 @@ namespace Lime
         }
 
         private Vector2 _localPosition;
-        public Vector2 localPosition
+        public Vector2 LocalPosition
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Lime
         }
 
         private Vector2 _localRotation;
-        public Vector2 localRotation
+        public Vector2 LocalRotation
         {
             get
             {

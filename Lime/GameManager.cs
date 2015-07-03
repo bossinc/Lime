@@ -8,7 +8,7 @@ namespace Lime
     class GameManager
     {
         private static GameManager _instance;
-        public static GameManager instance
+        public static GameManager Instance
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Lime
             List<GameObject> foundGameObjects = new List<GameObject>();
             foreach (GameObject gameObject in this.gameObjects)
             {
-                if(gameObject.name == name)
+                if(gameObject.Name == name)
                     foundGameObjects.Add(gameObject);
             }
             if (foundGameObjects == new List<GameObject>())
@@ -58,7 +58,7 @@ namespace Lime
             List<GameObject> foundGameObjects = new List<GameObject>();
             foreach (GameObject gameObject in this.gameObjects)
             {
-                if (gameObject.tag == tag)
+                if (gameObject.Tag == tag)
                     foundGameObjects.Add(gameObject);
             }
             if (foundGameObjects == new List<GameObject>())
