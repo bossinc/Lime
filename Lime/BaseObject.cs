@@ -65,7 +65,7 @@ namespace Lime
             {
                 if (baseObject is Component)
                 {
-                    ((Component)baseObject).gameObject.DestroyComponent((Component)baseObject);
+                    ((Component)baseObject).GameObject.DestroyComponent((Component)baseObject);
                 }
                 else if (baseObject is GameObject)
                 {
