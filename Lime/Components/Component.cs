@@ -29,33 +29,11 @@ namespace Lime
         {
         }
 
-        public virtual void Awake()
-        {
-
-        }
-
         public virtual void Start()
         {
-
+            
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void OnEnable()
-        {
-
-        }
-
-        public virtual void OnDisable()
-        {
-
-        }
-
-        public virtual void OnDestroy()
-        {
-        }
+        // TODO:
     }
 }
