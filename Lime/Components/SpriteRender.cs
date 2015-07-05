@@ -48,6 +48,8 @@ namespace Lime
             }
         }
 
-        pri
+        public SpriteRender()
+        {
+        }
     }
 }

@@ -13,11 +13,11 @@ namespace Lime
         {
             get
             {
-                return this._vertices;
+                return this._collisionPoints;
             }
             set
             {
-                this._vertices = value;
+                this._collisionPoints = value;
             }
         }
 
