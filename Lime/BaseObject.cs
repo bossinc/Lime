@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    abstract class BaseObject
+    public abstract class BaseObject
     {
         private static int _idIndexer = 0;
         private static int IdIndexer

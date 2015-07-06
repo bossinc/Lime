@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2E5FC6DC-245D-4265-A882-6F7FE38D37C0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lime</RootNamespace>
     <AssemblyName>Lime</AssemblyName>
@@ -37,14 +37,17 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
-    <Compile Include="Components\CircleCollider.cs" />
     <Compile Include="Components\Collider.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\GameBehaviour.cs" />
     <Compile Include="Components\RectangleCollider.cs" />
     <Compile Include="Components\SpriteRender.cs" />
+    <Compile Include="GameOptions.cs" />
     <Compile Include="GraphicsWorker\AnimationController.cs" />
     <Compile Include="GraphicsWorker\ScreenResolution.cs" />
     <Compile Include="Managers\GameManager.cs" />
@@ -52,8 +55,8 @@
     <Compile Include="GraphicsWorker\Animation.cs" />
     <Compile Include="Managers\GraphicsManager.cs" />
     <Compile Include="GraphicsWorker\Sprite.cs" />
-    <Compile Include="Lime.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="LimeSeed.cs" />
+    <Compile Include="Managers\PseudoPhysicsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Transform.cs" />
     <Compile Include="Space.cs" />
@@ -66,9 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\battleBG.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

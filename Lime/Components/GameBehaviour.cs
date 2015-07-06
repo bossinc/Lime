@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Lime
 {
-    class GameBehaviour : Component
+    public class GameBehaviour : Component
     {
         public GameBehaviour()
         {

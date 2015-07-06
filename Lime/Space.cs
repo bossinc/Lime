@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lime
 {
-    enum Space
+    public enum Space
     {
         World,
         Self

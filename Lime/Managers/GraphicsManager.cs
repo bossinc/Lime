@@ -36,9 +36,14 @@ namespace Lime
             }
         }
 
+        private double updateElapsedTime;
+        private double updateIntervalTime;
+
         public GraphicsManager()
         {
             this.SpriteRenders = new List<SpriteRender>();
+            updateIntervalTime = 1 / GameOptions.MAX_DRAW_FPS;
+            updateElapsedTime = 0;
         }
 
         public void AddSpriteRender(SpriteRender spriteRender)
@@ -47,16 +52,24 @@ namespace Lime
         }
 
         public void Update(GameTime gameTime)
-        {
-            foreach (SpriteRender spriteRender in SpriteRenders)
+        { 
+            updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+            if (updateElapsedTime >= updateIntervalTime)
             {
-                spriteRender.Update(gameTime);
+                foreach (SpriteRender spriteRender in SpriteRenders)
+                {
+                    spriteRender.Update(gameTime);
+                }
+                updateElapsedTime = 0;
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
         {
             ScreenResolution.BeginDraw();
+
+            graphicsDevice.Clear(GameOptions.BACK_COLOR);
+
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, ScreenResolution.getTransformationMatrix());
             foreach (SpriteRender spriteRender in SpriteRenders)
             {

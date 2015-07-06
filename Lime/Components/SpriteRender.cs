@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Lime
 {
-    class SpriteRender : Component
+    public class SpriteRender : Component
     {
         private Sprite _sprite;
         public Sprite Sprite
@@ -67,20 +67,28 @@ namespace Lime
             this.Color = Color.White;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (this.AnimationController != null)
             {
-                this.AnimationController.AdvanceToNextFrame();
+                this.AnimationController.Update(gameTime);
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
-            Point centerOffset = new Point(drawSize.X / 2, drawSize.Y / 2);
-            Rectangle drawPosition = new Rectangle(this.GameObject.Transform.Position.ToPoint() - centerOffset, drawSize);
-            spriteBatch.Draw(Sprite.Texture2D, drawPosition, this.AnimationController.GetCurrentFrame(), this.Color, this.GameObject.Transform.Rotation, this.GameObject.Transform.Position, SpriteEffects.None, this.Layer);
+            Vector2 centerOffset = new Vector2(drawSize.X / 2, drawSize.Y / 2);
+            Rectangle drawPosition = new Rectangle(this.GameObject.Transform.Position.ToPoint() - centerOffset.ToPoint(), drawSize);
+            spriteBatch.Draw(Sprite.Texture2D, 
+                centerOffset, 
+                this.AnimationController.GetCurrentFrame(), 
+                this.Color, 
+                this.GameObject.Transform.Rotation, 
+                this.GameObject.Transform.Position, 
+                this.GameObject.Transform.Scale,
+                SpriteEffects.None, 
+                this.Layer);
         }
     }
 }

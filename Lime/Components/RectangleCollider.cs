@@ -3,7 +3,7 @@
 
 namespace Lime
 {
-    class RectangleCollider : Collider
+    public class RectangleCollider : Collider
     {
         const int EXCLUSIVE_MINIMUM_SIZE = 0;
 

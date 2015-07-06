@@ -8,24 +8,23 @@ namespace Lime
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Lime : Game
+    public abstract class LimeSeed : Game
     {
-        public const int ScreenWidth = 400;
-        public const int ScreenHeight = 240;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Lime()
+        public LimeSeed()
         {
             graphics = new GraphicsDeviceManager(this);
             ScreenResolution.Init(ref graphics);
             Content.RootDirectory = "Content";
 
-            ScreenResolution.SetVirtualResolution(ScreenWidth, ScreenHeight);
+            ScreenResolution.SetVirtualResolution(GameOptions.V_SCREEN_WIDTH, GameOptions.V_SCREEN_HEIGHT);
 
-            
         }
+
+        protected abstract void CreateGame();
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -35,13 +34,11 @@ namespace Lime
         /// </summary>
         protected override void Initialize()
         {
-
-            ScreenResolution.SetResolution(ScreenWidth * 2,ScreenHeight * 2, false);           
+            ScreenResolution.SetResolution(GameOptions.SCREEN_WIDTH, GameOptions.SCREEN_HEIGHT, GameOptions.FULL_SCREEN);
 
             base.Initialize();
         }
 
-        Texture2D test;
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -51,20 +48,7 @@ namespace Lime
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            test = Content.Load<Texture2D>("battleBG");
-            SpriteRender spriteRender = new SpriteRender();
-            AnimationController antimationController = new AnimationController();
-            Animation animation = new Animation("test", new Point(0, 0), new Point(32, 32));
-            antimationController.AddAnimation(animation);
-            spriteRender.AnimationController = antimationController;
-            Sprite sprite = new Sprite(Content);
-
-            spriteRender.Sprite = sprite;
-
-            GameObject gameObject = new GameObject();
-            gameObject.AddComponent(spriteRender);
-
-            GameManager.Instance.AddGameObject(gameObject);
+            this.CreateGame();
 
             // TODO: use this.Content to load your game content here
         }
@@ -85,11 +69,7 @@ namespace Lime
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-            GameManager.Instance.Update();
+            GameManager.Instance.Update(gameTime);
             GraphicsManager.Instance.Update(gameTime);
             base.Update(gameTime);
         }
@@ -100,9 +80,7 @@ namespace Lime
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Cyan);
-
-            GraphicsManager.Instance.Draw(spriteBatch);
+            GraphicsManager.Instance.Draw(spriteBatch, GraphicsDevice);
 
             base.Draw(gameTime);
         }

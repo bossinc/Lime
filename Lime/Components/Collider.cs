@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class Collider : Component
+    public class Collider : Component
     {
         private List<Point> _collisionPoints;
         public List<Point> CollisionPoints
@@ -102,7 +102,7 @@ namespace Lime
             return isInside;
         }
 
-        public delegate void OnCollide(BaseObject collider);
+        public delegate void OnCollide(Collider collider);
 
         public event OnCollide OnCollisionEnter;
         public event OnCollide OnCollisionStay;

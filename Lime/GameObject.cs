@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class GameObject : BaseObject
+    
+    public class GameObject : BaseObject
     {
         #region Properties
 
@@ -78,7 +79,6 @@ namespace Lime
 
         public override void Update(GameTime gameTime)
         {
- 	        throw new NotImplementedException();
         }
 
         private void Destroy()
@@ -147,7 +147,7 @@ namespace Lime
         /// <param name="component">Component to be added</param>
         public void AddComponent(Component component)
         {
-            component.GetGameObject = GetGameObject;
+            component.SetGameObject(this);
             this.Components.Add(component);
         }
 

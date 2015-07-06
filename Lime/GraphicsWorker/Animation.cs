@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class Animation
+    public class Animation
     {
         private string _name;
         public string Name
@@ -63,6 +63,11 @@ namespace Lime
             int frameWidth = this.BoundingFrameRect.Width;
 
             this.BoundingFrameRect.X = frameWidth * frameIndex;
+        }
+
+        public void SetFrameOrder(List<int> frameOrder)
+        {
+            this.FrameOrder = frameOrder;
         }
     }
 }

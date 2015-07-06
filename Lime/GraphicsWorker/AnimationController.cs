@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class AnimationController
+    public class AnimationController
     {
         private List<Animation> Animations;
 
@@ -22,12 +22,18 @@ namespace Lime
             set
             {
                 this._fps = value;
+                updateIntervalTime = 1 / this.FPS;
+                updateElapsedTime = 0;
             }
         }
+
+        private double updateIntervalTime;
+        private double updateElapsedTime;
 
         public AnimationController()
         {
             this.Animations = new List<Animation>();
+            this.FPS = 60;
         }
 
         public void AddAnimation(Animation animation)
@@ -52,9 +58,19 @@ namespace Lime
             return this.Animations[this.CurrentAnimationIndex].GetCurrentFrame();
         }
 
-        public void AdvanceToNextFrame()
+        private void AdvanceToNextFrame()
         {
             this.Animations[this.CurrentAnimationIndex].AdvanceToNextFrame();
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+            if (updateElapsedTime >= updateIntervalTime)
+            {
+                AdvanceToNextFrame();
+                updateElapsedTime = 0;
+            }
         }
 
         public void ChangeAnimation(int index)

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class Transform : Component
+    public class Transform : Component
     {
         public const float MAX_DEGREES = 360;
         public const float MIN_DEGREES = 0;

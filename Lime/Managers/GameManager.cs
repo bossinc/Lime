@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Lime
 {
@@ -18,32 +19,46 @@ namespace Lime
             }
         }
 
-        private List<GameObject> gameObjects;
+        private List<GameObject> GameObjects;
+
+
+        private double updateIntervalTime;
+        private double updateElapsedTime;
 
         public GameManager()
         {
-            gameObjects = new List<GameObject>();
+            GameObjects = new List<GameObject>();
+            updateIntervalTime = 1 / GameOptions.MAX_UPDATE_FPS;
+            updateElapsedTime = 0;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            
+            updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+            if (updateElapsedTime >= updateIntervalTime)
+            {
+                foreach (GameObject gameObject in this.GameObjects)
+                {
+                    gameObject.Update(gameTime);
+                }
+                updateElapsedTime = 0;
+            }
         }
 
         public void AddGameObject(GameObject gameObject)
         {
-            this.gameObjects.Add(gameObject);
+            this.GameObjects.Add(gameObject);
         }
 
         public void RemoveGameObject(GameObject gameObject)
         {
-            this.gameObjects.Remove(gameObject);
+            this.GameObjects.Remove(gameObject);
         }
 
         public List<GameObject> FindGameObjectsName(string name)
         {
             List<GameObject> foundGameObjects = new List<GameObject>();
-            foreach (GameObject gameObject in this.gameObjects)
+            foreach (GameObject gameObject in this.GameObjects)
             {
                 if(gameObject.Name == name)
                     foundGameObjects.Add(gameObject);
@@ -56,7 +71,7 @@ namespace Lime
         public List<GameObject> FindGameObjectsTag(string tag)
         {
             List<GameObject> foundGameObjects = new List<GameObject>();
-            foreach (GameObject gameObject in this.gameObjects)
+            foreach (GameObject gameObject in this.GameObjects)
             {
                 if (gameObject.Tag == tag)
                     foundGameObjects.Add(gameObject);

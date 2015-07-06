@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lime.Components
+namespace Lime
 {
-    class CircleCollider : Collider
+    class PseudoPhysicsManager
     {
-
     }
 }

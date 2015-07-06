@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Lime
 {
-    class Sprite
+    public class Sprite
     {
         private Texture2D _texture2D;
         public Texture2D Texture2D
@@ -23,9 +23,8 @@ namespace Lime
             }
         }
 
-        public Sprite(ContentManager Content)
+        public Sprite()
         {
-            this.Texture2D = Content.Load<Texture2D>("battleBG");
         }
     }
 }

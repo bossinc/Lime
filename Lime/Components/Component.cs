@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Lime
 {
-    abstract class Component : BaseObject
+    public abstract class Component : BaseObject
     {
+        private GameObject _gameObject;
         /// <summary>
         /// The assocated GameObject.
         /// This GameObject will have this Component as a member.
@@ -15,11 +16,9 @@ namespace Lime
         {
             get
             {
-                return GetGameObject();
+                return this._gameObject;
             }
         }
-
-
         public Component()
         {
         }
@@ -29,7 +28,9 @@ namespace Lime
             
         }
 
-        public delegate GameObject DGetGameObject();
-        public DGetGameObject GetGameObject;
+        public  void SetGameObject(GameObject gameObject)
+        {
+            this._gameObject = gameObject;
+        }
     }
 }
