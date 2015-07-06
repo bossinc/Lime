@@ -29,7 +29,7 @@ namespace Lime
 
         private Point StartingPosition;
 
-        public Animation(string name, Point boundingFrameSize, Point startingPosition)
+        public Animation(string name, Point startingPosition, Point boundingFrameSize)
         {
             this.Name = name;
             this.BoundingFrameRect = new Rectangle(startingPosition, boundingFrameSize);
@@ -46,8 +46,20 @@ namespace Lime
 
         public void AdvanceToNextFrame()
         {
-            CurrentFrame++;
-            int frameIndex = FrameOrder[CurrentFrame];
+            this.CurrentFrame++;
+            int frameIndex;
+            if (this.FrameOrder.Count > 0)
+            {
+                if (this.CurrentFrame >= this.FrameOrder.Count)
+                {
+                    this.CurrentFrame = 0;
+                }
+                frameIndex = this.FrameOrder[this.CurrentFrame];
+            }
+            else
+            {
+                frameIndex = 0;
+            }
             int frameWidth = this.BoundingFrameRect.Width;
 
             this.BoundingFrameRect.X = frameWidth * frameIndex;

@@ -51,7 +51,7 @@ namespace Lime
 
         public BaseObject()
         {
-            this.OnCreated(this);
+            //this.OnCreated(this);
         }
 
         protected void SetId()
@@ -90,6 +90,7 @@ namespace Lime
                     Destroy(this, 0);
             }
         }
+
 
         #region Delegates
 

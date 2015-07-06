@@ -10,13 +10,21 @@ namespace Lime
     /// </summary>
     public class Lime : Game
     {
+        public const int ScreenWidth = 400;
+        public const int ScreenHeight = 240;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public Lime()
         {
             graphics = new GraphicsDeviceManager(this);
+            ScreenResolution.Init(ref graphics);
             Content.RootDirectory = "Content";
+
+            ScreenResolution.SetVirtualResolution(ScreenWidth, ScreenHeight);
+
+            
         }
 
         /// <summary>
@@ -27,11 +35,13 @@ namespace Lime
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+
+            ScreenResolution.SetResolution(ScreenWidth * 2,ScreenHeight * 2, false);           
 
             base.Initialize();
         }
 
+        Texture2D test;
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -40,6 +50,21 @@ namespace Lime
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            test = Content.Load<Texture2D>("battleBG");
+            SpriteRender spriteRender = new SpriteRender();
+            AnimationController antimationController = new AnimationController();
+            Animation animation = new Animation("test", new Point(0, 0), new Point(32, 32));
+            antimationController.AddAnimation(animation);
+            spriteRender.AnimationController = antimationController;
+            Sprite sprite = new Sprite(Content);
+
+            spriteRender.Sprite = sprite;
+
+            GameObject gameObject = new GameObject();
+            gameObject.AddComponent(spriteRender);
+
+            GameManager.Instance.AddGameObject(gameObject);
 
             // TODO: use this.Content to load your game content here
         }
@@ -64,7 +89,8 @@ namespace Lime
                 Exit();
 
             // TODO: Add your update logic here
-
+            GameManager.Instance.Update();
+            GraphicsManager.Instance.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -74,9 +100,9 @@ namespace Lime
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Cyan);
 
-            // TODO: Add your drawing code here
+            GraphicsManager.Instance.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

@@ -91,6 +91,7 @@ namespace Lime
                 this._localRotation = value;
             }
         }
+
         #endregion Properties
 
         public Transform(Vector2 position)

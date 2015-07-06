@@ -7,7 +7,6 @@ namespace Lime
 {
     abstract class Component : BaseObject
     {
-        private GameObject _gameObject;
         /// <summary>
         /// The assocated GameObject.
         /// This GameObject will have this Component as a member.
@@ -16,11 +15,7 @@ namespace Lime
         {
             get
             {
-                return this._gameObject;
-            }
-            set
-            {
-                this._gameObject = value;
+                return GetGameObject();
             }
         }
 
@@ -34,6 +29,7 @@ namespace Lime
             
         }
 
-        // TODO:
+        public delegate GameObject DGetGameObject();
+        public DGetGameObject GetGameObject;
     }
 }

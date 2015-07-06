@@ -68,6 +68,7 @@ namespace Lime
 
         public GameObject()
         {
+            this.Components = new List<Component>();
             this.Transform = new Transform(Vector2.Zero);
         }
 
@@ -146,12 +147,18 @@ namespace Lime
         /// <param name="component">Component to be added</param>
         public void AddComponent(Component component)
         {
+            component.GetGameObject = GetGameObject;
             this.Components.Add(component);
         }
 
         public void DestroyComponent(Component component)
         {
             this.Components.Remove(component);
+        }
+
+        private GameObject GetGameObject()
+        {
+            return this;
         }
 
         #endregion Methods

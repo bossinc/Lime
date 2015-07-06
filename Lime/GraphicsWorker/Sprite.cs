@@ -23,24 +23,9 @@ namespace Lime
             }
         }
 
-        private List<Animation> Animations;
-
         public Sprite(ContentManager Content)
         {
-            Animations = new List<Animation>();
-            _texture2D = Content.Load<Texture2D>("Content/battleBG");
-        }
-
-        public Animation GetAnimation(string name)
-        {
-            foreach (Animation animation in this.Animations)
-            {
-                if (animation.Name == name)
-                {
-                    return animation;
-                }
-            }
-            return null;
+            this.Texture2D = Content.Load<Texture2D>("battleBG");
         }
     }
 }

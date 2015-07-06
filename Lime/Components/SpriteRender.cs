@@ -22,21 +22,34 @@ namespace Lime
             }
         }
 
-        private float _fps;
-        public float FPS
+        private AnimationController _animationController;
+        public AnimationController AnimationController
         {
             get
             {
-                return this._fps;
+                return this._animationController;
             }
             set
             {
-                this._fps = value;
+                this._animationController = value;
             }
         }
 
-        private int _layer;
-        public int Layer
+        private Color _color;
+        public Color Color
+        {
+            get
+            {
+                return this._color;
+            }
+            set
+            {
+                this._color = value;
+            }
+        }
+
+        private float _layer;
+        public float Layer
         {
             get
             {
@@ -50,6 +63,24 @@ namespace Lime
 
         public SpriteRender()
         {
+            GraphicsManager.Instance.AddSpriteRender(this);
+            this.Color = Color.White;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            if (this.AnimationController != null)
+            {
+                this.AnimationController.AdvanceToNextFrame();
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
+            Point centerOffset = new Point(drawSize.X / 2, drawSize.Y / 2);
+            Rectangle drawPosition = new Rectangle(this.GameObject.Transform.Position.ToPoint() - centerOffset, drawSize);
+            spriteBatch.Draw(Sprite.Texture2D, drawPosition, this.AnimationController.GetCurrentFrame(), this.Color, this.GameObject.Transform.Rotation, this.GameObject.Transform.Position, SpriteEffects.None, this.Layer);
         }
     }
 }

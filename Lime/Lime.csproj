@@ -45,10 +45,12 @@
     <Compile Include="Components\GameBehaviour.cs" />
     <Compile Include="Components\RectangleCollider.cs" />
     <Compile Include="Components\SpriteRender.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="GraphicsWorker\AnimationController.cs" />
+    <Compile Include="GraphicsWorker\ScreenResolution.cs" />
+    <Compile Include="Managers\GameManager.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GraphicsWorker\Animation.cs" />
-    <Compile Include="GraphicsWorker\GraphicsManager.cs" />
+    <Compile Include="Managers\GraphicsManager.cs" />
     <Compile Include="GraphicsWorker\Sprite.cs" />
     <Compile Include="Lime.cs" />
     <Compile Include="Program.cs" />
@@ -64,7 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\battleBG.png" />
+    <Content Include="Content\battleBG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
