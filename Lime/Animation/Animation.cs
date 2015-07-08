@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Lime
+namespace Lime.Animation
 {
     public class Animation
     {

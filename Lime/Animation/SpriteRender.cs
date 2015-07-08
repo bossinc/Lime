@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Lime
+namespace Lime.Animation
 {
     public class SpriteRender : Component
     {
@@ -63,7 +63,6 @@ namespace Lime
 
         public SpriteRender()
         {
-            GraphicsManager.Instance.AddSpriteRender(this);
             this.Color = Color.White;
         }
 

@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Lime
+namespace Lime.Animation
 {
-    class GraphicsManager
+    internal sealed class GraphicsManager : Attribute
     {
         private static GraphicsManager _instance;
         public static GraphicsManager Instance

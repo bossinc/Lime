@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lime
 {
-    class GameManager
+    internal sealed class GameManager : Attribute
     {
         private static GameManager _instance;
         public static GameManager Instance
@@ -37,6 +37,7 @@ namespace Lime
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
             if (updateElapsedTime >= updateIntervalTime)
             {
+                Lime.PseudoPhysics.PseudoPhysicsManager.Instance.Update();
                 foreach (GameObject gameObject in this.GameObjects)
                 {
                     gameObject.Update(gameTime);

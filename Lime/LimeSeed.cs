@@ -32,7 +32,7 @@ namespace Lime
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
+        protected sealed override void Initialize()
         {
             ScreenResolution.SetResolution(GameOptions.SCREEN_WIDTH, GameOptions.SCREEN_HEIGHT, GameOptions.FULL_SCREEN);
 
@@ -43,7 +43,7 @@ namespace Lime
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
-        protected override void LoadContent()
+        protected sealed override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -57,7 +57,7 @@ namespace Lime
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
         /// </summary>
-        protected override void UnloadContent()
+        protected sealed override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
@@ -67,10 +67,10 @@ namespace Lime
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        protected sealed override void Update(GameTime gameTime)
         {
             GameManager.Instance.Update(gameTime);
-            GraphicsManager.Instance.Update(gameTime);
+            Lime.Animation.GraphicsManager.Instance.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -78,9 +78,9 @@ namespace Lime
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+        protected sealed override void Draw(GameTime gameTime)
         {
-            GraphicsManager.Instance.Draw(spriteBatch, GraphicsDevice);
+            Lime.Animation.GraphicsManager.Instance.Draw(spriteBatch, GraphicsDevice);
 
             base.Draw(gameTime);
         }

@@ -51,7 +51,6 @@ namespace Lime
 
         public BaseObject()
         {
-            //this.OnCreated(this);
         }
 
         protected void SetId()
@@ -99,8 +98,6 @@ namespace Lime
         #endregion Delegates
 
         #region Events
-
-        public event ChangedEventHandler OnCreated;
 
         public event ChangedEventHandler OnDestroy;
 
