@@ -78,13 +78,13 @@ namespace Lime.Animation
         {
             Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
             Vector2 centerOffset = new Vector2(drawSize.X / 2, drawSize.Y / 2);
-            Rectangle drawPosition = new Rectangle(this.GameObject.Transform.Position.ToPoint() - centerOffset.ToPoint(), drawSize);
-            spriteBatch.Draw(Sprite.Texture2D, 
-                centerOffset, 
+            Vector2 drawPosition = this.GameObject.Transform.Position;
+            spriteBatch.Draw(Sprite.Texture2D,
+                drawPosition, 
                 this.AnimationController.GetCurrentFrame(), 
                 this.Color, 
-                this.GameObject.Transform.Rotation, 
-                this.GameObject.Transform.Position, 
+                this.GameObject.Transform.Rotation,
+                centerOffset, 
                 this.GameObject.Transform.Scale,
                 SpriteEffects.None, 
                 this.Layer);

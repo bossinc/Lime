@@ -20,7 +20,7 @@ namespace Lime
             ScreenResolution.Init(ref graphics);
             Content.RootDirectory = "Content";
 
-            ScreenResolution.SetVirtualResolution(GameOptions.V_SCREEN_WIDTH, GameOptions.V_SCREEN_HEIGHT);
+            ScreenResolution.SetVirtualResolution((int)(GameOptions.SCREEN_WIDTH * GameOptions.V_SCREEN_FACTOR), ((int)(GameOptions.SCREEN_HEIGHT * GameOptions.V_SCREEN_FACTOR)));
 
         }
 

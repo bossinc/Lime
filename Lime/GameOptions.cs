@@ -8,8 +8,7 @@ namespace Lime
 {
     public class GameOptions
     {
-        public static int V_SCREEN_WIDTH = 400;
-        public static int V_SCREEN_HEIGHT = 240;
+        public static float V_SCREEN_FACTOR = 0.5f;
         public static int SCREEN_WIDTH = 800;
         public static int SCREEN_HEIGHT = 480;
         public static bool FULL_SCREEN = false;

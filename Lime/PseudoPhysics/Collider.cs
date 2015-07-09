@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Lime.PseudoPhysics
 {
@@ -75,6 +76,8 @@ namespace Lime.PseudoPhysics
 
         private List<Collider> LastColliders;
 
+        private bool isLastMouseCollide;
+
         private bool _trigger;
         public bool Trigger
         {
@@ -91,13 +94,13 @@ namespace Lime.PseudoPhysics
         {
             this.CurColliders = new List<Collider>();
             this.LastColliders = new List<Collider>();
+            isLastMouseCollide = false;
         }
-        public Collider(GameObject gameObject)
+
+        public override void SetGameObject(GameObject gameObject)
         {
-            gameObject.AddComponent(this);
+            base.SetGameObject(gameObject);
             this.LastPosition = this.GameObject.Transform.Position;
-            this.CurColliders = new List<Collider>();
-            this.LastColliders = new List<Collider>();
         }
 
         internal virtual bool Intersects(Collider collider)
@@ -134,7 +137,20 @@ namespace Lime.PseudoPhysics
             this.CurColliders.Remove(collider);
         }
 
-        internal virtual void Update()
+        internal void Update()
+        {
+            CollisionUpdate();
+            TriggerUpdate();
+            MouseUpdate();
+
+            this.LastColliders = null;
+            this.LastColliders = new List<Collider>();
+            this.LastColliders.AddRange(CurColliders);
+
+            this.LastPosition = this.GameObject.Transform.Position;
+        }
+
+        protected virtual void CollisionUpdate()
         {
             foreach (Collider collider in this.CurColliders)
             {
@@ -158,19 +174,61 @@ namespace Lime.PseudoPhysics
                     OnCollisionExit(collider);
                 }
             }
+        }
 
-            this.LastColliders = null;
-            this.LastColliders = new List<Collider>();
-            this.LastColliders.AddRange(CurColliders);
+        protected virtual void TriggerUpdate()
+        {
+        }
 
-            this.LastPosition = this.GameObject.Transform.Position;
+        protected virtual void MouseUpdate()
+        {
+            MouseState mouseState = Mouse.GetState();
+            Point mousePosition = new Point((int)(mouseState.Position.X * GameOptions.V_SCREEN_FACTOR), (int)(mouseState.Y * GameOptions.V_SCREEN_FACTOR));
+            if (this.Bounds.Contains(mousePosition))
+            {
+                if (isLastMouseCollide)
+                {
+                    OnMouseOver(this, mouseState);
+                }
+                else
+                {
+                    OnMouseEnter(this, mouseState);
+                }
+
+                if (mouseState.LeftButton == ButtonState.Pressed || mouseState.RightButton == ButtonState.Pressed || mouseState.MiddleButton == ButtonState.Pressed)
+                {
+                    OnMouseDown(this, mouseState);
+                }
+                if (mouseState.LeftButton == ButtonState.Released || mouseState.RightButton == ButtonState.Released || mouseState.MiddleButton == ButtonState.Released)
+                {
+                    OnMouseUp(this, mouseState);
+                }
+
+                isLastMouseCollide = true;
+            }
+            else
+            {
+                if (isLastMouseCollide)
+                {
+                    OnMouseExit(this, mouseState);
+                }
+
+                isLastMouseCollide = false;
+            }
         }
 
         public delegate void OnCollide(Collider collider);
+        public delegate void OnMouseCollide(Collider collider, MouseState mouseState);
 
         public event OnCollide OnCollisionEnter;
         public event OnCollide OnCollisionStay;
         public event OnCollide OnCollisionExit;
+
+        public event OnMouseCollide OnMouseEnter;
+        public event OnMouseCollide OnMouseOver;
+        public event OnMouseCollide OnMouseUp;
+        public event OnMouseCollide OnMouseDown;
+        public event OnMouseCollide OnMouseExit;
 
         public event OnCollide OnTriggerEnter;
         public event OnCollide OnTriggerStay;

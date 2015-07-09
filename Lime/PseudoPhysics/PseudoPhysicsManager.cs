@@ -35,6 +35,7 @@ namespace Lime.PseudoPhysics
         {
             foreach (Collider collider in this.Colliders)
             {
+                collider.Update();
                 if (!collider.Stale)
                 {
                     foreach (Collider subCollider in collider.CurColliders)
@@ -42,7 +43,6 @@ namespace Lime.PseudoPhysics
                         if (!collider.Intersects(subCollider))
                         {
                             collider.RemoveCurCollider(subCollider);
-                            collider.Update();
                         }
                     }
 
@@ -51,7 +51,6 @@ namespace Lime.PseudoPhysics
                         if (collider.Intersects(subCollider))
                         {
                             collider.AddCurCollider(subCollider);
-                            collider.Update();
                         }
                     }
                 }

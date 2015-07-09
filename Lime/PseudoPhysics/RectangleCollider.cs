@@ -5,10 +5,8 @@ namespace Lime.PseudoPhysics
 {
     public class RectangleCollider : Collider
     {
-        public RectangleCollider(GameObject gameObject)
+        public RectangleCollider()
         {
-            gameObject.AddComponent(this);
-            this.LastPosition = this.GameObject.Transform.Position;
         }
         internal override bool Intersects(Collider collider)
         {
