@@ -77,6 +77,7 @@ namespace Lime.PseudoPhysics
         private List<Collider> LastColliders;
 
         private bool isLastMouseCollide;
+        private bool isLastMouseDown;
 
         private bool _trigger;
         public bool Trigger
@@ -95,6 +96,7 @@ namespace Lime.PseudoPhysics
             this.CurColliders = new List<Collider>();
             this.LastColliders = new List<Collider>();
             isLastMouseCollide = false;
+            isLastMouseDown = false;
         }
 
         public override void SetGameObject(GameObject gameObject)
@@ -157,12 +159,14 @@ namespace Lime.PseudoPhysics
                 //Enter collision
                 if (!this.LastColliders.Contains(collider))
                 {
-                    OnCollisionEnter(collider);
+                    if(OnMouseEnter != null)
+                        OnCollisionEnter(collider);
                 }
                 //Stay collision
                 if (this.LastColliders.Contains(collider))
                 {
-                    OnCollisionStay(collider);
+                    if (OnCollisionStay != null)
+                        OnCollisionStay(collider);
                 }
             }
 
@@ -171,7 +175,8 @@ namespace Lime.PseudoPhysics
                 //Exit collision
                 if (!this.CurColliders.Contains(collider))
                 {
-                    OnCollisionExit(collider);
+                    if (OnCollisionExit != null)
+                        OnCollisionExit(collider);
                 }
             }
         }
@@ -188,20 +193,26 @@ namespace Lime.PseudoPhysics
             {
                 if (isLastMouseCollide)
                 {
-                    OnMouseOver(this, mouseState);
+                    if(OnMouseOver != null)
+                        OnMouseOver(this, mouseState);
                 }
                 else
                 {
-                    OnMouseEnter(this, mouseState);
+                    if(OnMouseEnter != null)
+                        OnMouseEnter(this, mouseState);
                 }
 
                 if (mouseState.LeftButton == ButtonState.Pressed || mouseState.RightButton == ButtonState.Pressed || mouseState.MiddleButton == ButtonState.Pressed)
                 {
-                    OnMouseDown(this, mouseState);
+                    if(OnMouseDown != null)
+                        OnMouseDown(this, mouseState);
+                    isLastMouseDown = true;
                 }
-                if (mouseState.LeftButton == ButtonState.Released || mouseState.RightButton == ButtonState.Released || mouseState.MiddleButton == ButtonState.Released)
+                else if (isLastMouseDown)
                 {
-                    OnMouseUp(this, mouseState);
+                    if (OnMouseUp != null)
+                        OnMouseUp(this, mouseState);
+                    isLastMouseDown = false;
                 }
 
                 isLastMouseCollide = true;
@@ -210,7 +221,8 @@ namespace Lime.PseudoPhysics
             {
                 if (isLastMouseCollide)
                 {
-                    OnMouseExit(this, mouseState);
+                    if(OnMouseExit != null)
+                        OnMouseExit(this, mouseState);
                 }
 
                 isLastMouseCollide = false;
