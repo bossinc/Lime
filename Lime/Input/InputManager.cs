@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Lime.Input
 {
-    enum LKeyState
+    public enum LKeyState
     {
         Down,
         Pressed,
@@ -43,12 +43,7 @@ namespace Lime.Input
             InputKey inputKey = new InputKey(name, key);
         }
 
-        public void LoadDefaultKeys()
-        {
-            InputKey up = new InputKey("Up", Keys.A
-        }
-
-        public void Update()
+        internal void Update()
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -72,29 +67,13 @@ namespace Lime.Input
                 {
                     //up
                     inputKey.KeyState = LKeyState.Up;
+                    inputKey.lastPressed = false;
                 }
                 else
-                    inputKey.KeyState = LKeyState.None;
-                inputKey.lastPressed = false;
-            }
-        }
-
-        public LKeyState GetKeyState(string name)
-        {
-            LKeyState keyState = LKeyState.None;
-            foreach (InputKey inputKey in this.InputKeys)
-            {
-                if (inputKey.Name == name)
                 {
-                    if (inputKey.KeyState == LKeyState.Down)
-                        return inputKey.KeyState;
-                    else if(inputKey.KeyState == LKeyState.Pressed)
-                    {
-                    }
+                    inputKey.KeyState = LKeyState.None;
                 }
             }
-
-            return keyState;
         }
     }
 }

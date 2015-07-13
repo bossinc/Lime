@@ -15,12 +15,12 @@ namespace Lime.PseudoPhysics
             this.Colliders = new List<Collider>();
         }
 
-        public void AddCollider(Collider collider)
+        internal void AddCollider(Collider collider)
         {
             this.Colliders.Add(collider);
         }
 
-        public void Update()
+        internal void Update()
         {
             foreach (Collider collider in this.Colliders)
             {

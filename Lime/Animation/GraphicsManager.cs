@@ -35,12 +35,12 @@ namespace Lime.Animation
             updateElapsedTime = 0;
         }
 
-        public void AddSpriteRender(SpriteRender spriteRender)
+        internal void AddSpriteRender(SpriteRender spriteRender)
         {
             this.SpriteRenders.Add(spriteRender);
         }
 
-        public void Update(GameTime gameTime)
+        internal void Update(GameTime gameTime)
         { 
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
             if (updateElapsedTime >= updateIntervalTime)
@@ -53,7 +53,7 @@ namespace Lime.Animation
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+        internal void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
         {
             ScreenResolution.BeginDraw();
 

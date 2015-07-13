@@ -8,7 +8,7 @@ namespace Lime
 {
     internal sealed class GameManager : Attribute
     {
-        public static GameManager Instance
+        internal static GameManager Instance
         {
             get
             {
@@ -17,7 +17,7 @@ namespace Lime
         }
 
         private PseudoPhysics.PseudoPhysicsManager _pseudoPhysicsManager;
-        public PseudoPhysics.PseudoPhysicsManager PseudoPhysicsManager
+        internal PseudoPhysics.PseudoPhysicsManager PseudoPhysicsManager
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Lime
         }
 
         private Animation.GraphicsManager _graphicsManager;
-        public Animation.GraphicsManager GraphicsManager
+        internal Animation.GraphicsManager GraphicsManager
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Lime
         }
 
         private Input.InputManager _inputManager;
-        public Input.InputManager InputManager
+        internal Input.InputManager InputManager
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Lime
             updateElapsedTime = 0;
         }
 
-        public void Update(GameTime gameTime)
+        internal void Update(GameTime gameTime)
         {
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
             if (updateElapsedTime >= updateIntervalTime)
@@ -85,12 +85,12 @@ namespace Lime
             }
         }
 
-        public void AddGameObject(GameObject gameObject)
+        internal void AddGameObject(GameObject gameObject)
         {
             this.GameObjects.Add(gameObject);
         }
 
-        public void RemoveGameObject(GameObject gameObject)
+        internal void RemoveGameObject(GameObject gameObject)
         {
             this.GameObjects.Remove(gameObject);
         }

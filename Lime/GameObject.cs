@@ -79,6 +79,11 @@ namespace Lime
 
         public override void Update(GameTime gameTime)
         {
+            foreach (Component component in Components)
+            {
+                if (!(component is Animation.SpriteRender) && !(component is PseudoPhysics.Collider))
+                    component.Update(gameTime);
+            }
         }
 
         private void Destroy()
@@ -129,22 +134,12 @@ namespace Lime
         /// </summary>
         /// <typeparam name="T">The type of component</typeparam>
         /// <returns>Returns found componet. If not found returns null</returns>
-        public Component GetComponent<T>()
+        public T GetComponent<T>() where T : class
         {
-            foreach (Component component in this.Components)
+            for (int i = 0; i < this.Components.Count; i++)
             {
-                if (component is T)
-                    return component;
-            }
-            return null;
-        }
-
-        public Component GetComponent(int id)
-        {
-            foreach (Component component in this.Components)
-            {
-                if (component.InstanceId == id)
-                    return component;
+                if (this.Components[i] is T)
+                    return this.Components[i] as T;
             }
             return null;
         }
