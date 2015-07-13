@@ -21,8 +21,8 @@ namespace Lime.Input
             }
         }
 
-        private InputKey _key;
-        public InputKey Key
+        private Keys _key;
+        public Keys Key
         {
             get
             {
@@ -32,6 +32,27 @@ namespace Lime.Input
             {
                 this._key = value;
             }
+        }
+
+        private LKeyState _keyState;
+        public LKeyState KeyState
+        {
+            get
+            {
+                return this._keyState;
+            }
+            set
+            {
+            }
+        }
+
+        internal bool lastPressed;
+
+        public InputKey(string name, Keys key)
+        {
+            this.Name = name;
+            this.Key = key;
+            lastPressed = false;
         }
     }
 }

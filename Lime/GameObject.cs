@@ -97,9 +97,9 @@ namespace Lime
             foreach (Component component in this.Components)
             {
                 if(component is Animation.SpriteRender)
-                    Animation.GraphicsManager.Instance.AddSpriteRender((Animation.SpriteRender)component);
+                    GameManager.Instance.GraphicsManager.AddSpriteRender((Animation.SpriteRender)component);
                 else if(component is PseudoPhysics.Collider)
-                    PseudoPhysics.PseudoPhysicsManager.Instance.AddCollider((PseudoPhysics.Collider)component);
+                    GameManager.Instance.PseudoPhysicsManager.AddCollider((PseudoPhysics.Collider)component);
             }
             //this.OnCreated(this);
         }

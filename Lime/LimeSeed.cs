@@ -69,8 +69,9 @@ namespace Lime
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected sealed override void Update(GameTime gameTime)
         {
+            GameManager.Instance.InputManager.Update();
             GameManager.Instance.Update(gameTime);
-            Lime.Animation.GraphicsManager.Instance.Update(gameTime);
+            GameManager.Instance.GraphicsManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -80,7 +81,7 @@ namespace Lime
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected sealed override void Draw(GameTime gameTime)
         {
-            Lime.Animation.GraphicsManager.Instance.Draw(spriteBatch, GraphicsDevice);
+            GameManager.Instance.GraphicsManager.Draw(spriteBatch, GraphicsDevice);
 
             base.Draw(gameTime);
         }

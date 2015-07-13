@@ -10,17 +10,6 @@ namespace Lime.Animation
 {
     internal sealed class GraphicsManager : Attribute
     {
-        private static GraphicsManager _instance;
-        public static GraphicsManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new GraphicsManager();
-                return _instance;
-            }
-        }
-
         private List<SpriteRender> SpriteRenders;
 
         private ContentManager _content;

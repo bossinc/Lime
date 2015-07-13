@@ -8,17 +8,6 @@ namespace Lime.PseudoPhysics
 {
     internal sealed class PseudoPhysicsManager
     {
-        private static PseudoPhysicsManager _instance;
-        public static PseudoPhysicsManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new PseudoPhysicsManager();
-                return _instance;
-            }
-        }
-
         private List<Collider> Colliders;
 
         public PseudoPhysicsManager()

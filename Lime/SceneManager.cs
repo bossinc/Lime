@@ -13,7 +13,12 @@ namespace Lime
         public static GameManager GetCurrentGameManager()
         {
             if(Scenes.Count == 0)
-                Scenes.Add(new Scene(new GameManager(), "Default"));
+                Scenes.Add(new Scene(
+                    new GameManager(
+                        new PseudoPhysics.PseudoPhysicsManager(), 
+                        new Animation.GraphicsManager(), 
+                        new Input.InputManager()), 
+                    "Default"));
             return Scenes[CurrentSceneIndex].GameManager;
         }
 
