@@ -11,7 +11,9 @@ namespace Lime
     {
         #region Properties
 
-        private string _tag;
+        /// <summary>
+        /// Can be used to identify a GameObject
+        /// </summary>
         public string Tag
         {
             get
@@ -23,8 +25,11 @@ namespace Lime
                 this._tag = value;
             }
         }
+        private string _tag;
 
-        private Transform _transform;
+        /// <summary>
+        /// Used to determine drawing and collision locations
+        /// </summary>
         public Transform Transform
         {
             get
@@ -36,8 +41,11 @@ namespace Lime
                 this._transform = value;
             }
         }
+        private Transform _transform;
 
-        private string _name;
+        /// <summary>
+        /// Can be used to identify a GameObject
+        /// </summary>
         public string Name
         {
             get
@@ -49,8 +57,8 @@ namespace Lime
                 this._name = value;
             }
         }
+        private string _name;
 
-        private List<Component> _components;
         private List<Component> Components
         {
             get
@@ -62,6 +70,7 @@ namespace Lime
                 this._components = value;
             }
         }
+        private List<Component> _components;
 
         #endregion Properties
 
@@ -77,7 +86,11 @@ namespace Lime
 
         #region Methods
 
-        public override void Update(GameTime gameTime)
+        /// <summary>
+        /// DO NOT USE
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public sealed override void Update(GameTime gameTime)
         {
             foreach (Component component in Components)
             {
@@ -92,7 +105,7 @@ namespace Lime
         }
 
         /// <summary>
-        /// Adds this GameObject to the singeton of GameManager
+        /// Adds this GameObject to the current scene
         /// </summary>
         public static void Instantiate(GameObject gameObject, Vector2 postion)
         {
@@ -156,6 +169,10 @@ namespace Lime
             this.Components.Add(component);
         }
 
+        /// <summary>
+        /// Removes the component from the game
+        /// </summary>
+        /// <param name="component">The component to be destroyed</param>
         public void DestroyComponent(Component component)
         {
             this.Components.Remove(component);

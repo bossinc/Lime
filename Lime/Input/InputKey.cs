@@ -8,7 +8,10 @@ namespace Lime.Input
 {
     public class InputKey
     {
-        private string _name;
+        /// <summary>
+        /// The name of the InputKey
+        /// This is used to identify the InputKey action
+        /// </summary>
         public string Name
         {
             get
@@ -20,8 +23,11 @@ namespace Lime.Input
                 this._name = value;
             }
         }
+        private string _name;
 
-        private Keys _key;
+        /// <summary>
+        /// The action key
+        /// </summary>
         public Keys Key
         {
             get
@@ -33,8 +39,11 @@ namespace Lime.Input
                 this._key = value;
             }
         }
+        private Keys _key;
 
-        private LKeyState _keyState;
+        /// <summary>
+        /// The current state of the Key
+        /// </summary>
         public LKeyState KeyState
         {
             get
@@ -46,9 +55,15 @@ namespace Lime.Input
                 this._keyState = value;
             }
         }
+        private LKeyState _keyState;
 
         internal bool lastPressed;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">The name of the InputKey</param>
+        /// <param name="key">The action key</param>
         public InputKey(string name, Keys key)
         {
             this.Name = name;
@@ -57,7 +72,10 @@ namespace Lime.Input
             this.KeyState = LKeyState.None;
         }
 
-
+        /// <summary>
+        /// Loads some basic keys. These keys include:
+        /// Up, Left, Right, Down, Action, Back, and Pause
+        /// </summary>
         public static void LoadDefaultKeys()
         {
             //movement
@@ -89,8 +107,11 @@ namespace Lime.Input
 
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">The name of the InputKey</param>
+        /// <returns>The current state of the InputKey</returns>
         public static LKeyState GetKeyState(string name)
         {
             LKeyState keyState = LKeyState.None;

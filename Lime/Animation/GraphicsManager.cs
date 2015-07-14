@@ -13,7 +13,7 @@ namespace Lime.Animation
         private List<SpriteRender> SpriteRenders;
 
         private ContentManager _content;
-        public ContentManager Content
+        internal ContentManager Content
         {
             get
             {

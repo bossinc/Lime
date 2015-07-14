@@ -6,25 +6,29 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace Lime
+namespace Lime.Animation
 {
     public class Sprite
     {
-        private Texture2D _texture2D;
-        public Texture2D Texture2D
+        /// <summary>
+        /// A spriteSheet
+        /// </summary>
+        public Texture2D SpriteSheet
         {
             get
             {
-                return this._texture2D;
+                return this._spriteSheet;
             }
             set
             {
-                this._texture2D = value;
+                this._spriteSheet = value;
             }
         }
+        private Texture2D _spriteSheet;
 
-        public Sprite()
+        public Sprite(Texture2D spriteSheet)
         {
+            this.SpriteSheet = spriteSheet;
         }
     }
 }

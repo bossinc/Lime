@@ -13,10 +13,10 @@ namespace Lime.Input
         Up,
         None
     }
-    class InputManager
+    internal class InputManager
     {
         private List<InputKey> _inputKeys;
-        public List<InputKey> InputKeys
+        internal List<InputKey> InputKeys
         {
             get
             {
@@ -33,12 +33,12 @@ namespace Lime.Input
             this.InputKeys = new List<InputKey>();
         }
 
-        public void AddInputKey(InputKey inputKey)
+        internal void AddInputKey(InputKey inputKey)
         {
             this.InputKeys.Add(inputKey);
         }
 
-        public void AddInputKey(string name, Keys key)
+        internal void AddInputKey(string name, Keys key)
         {
             InputKey inputKey = new InputKey(name, key);
         }

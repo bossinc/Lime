@@ -17,7 +17,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Lime
 {
-    class ScreenResolution
+    internal class ScreenResolution
     {
         static private GraphicsDeviceManager _Device = null;
 

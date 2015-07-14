@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lime
 {
-    class Scene
+    internal class Scene
     {
         private GameManager _gameManager;
         internal GameManager GameManager

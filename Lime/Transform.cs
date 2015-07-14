@@ -10,8 +10,11 @@ namespace Lime
     {
         public const float MAX_DEGREES = 360;
         public const float MIN_DEGREES = 0;
+
         #region Properties
-        private Vector2 _position;
+        /// <summary>
+        /// The current position of the Transform
+        /// </summary>
         public Vector2 Position
         {
             get
@@ -23,8 +26,11 @@ namespace Lime
                 this._position = value;
             }
         }
+        private Vector2 _position;
 
-        private float _rotation;
+        /// <summary>
+        /// The current rotation of the Transform in degrees
+        /// </summary>
         public float Rotation
         {
             get
@@ -36,8 +42,11 @@ namespace Lime
                 this._rotation = value;
             }
         }
+        private float _rotation;
 
-        private Vector2 _scale;
+        /// <summary>
+        /// The current scale of the Transform
+        /// </summary>
         public Vector2 Scale
         {
             get
@@ -49,8 +58,12 @@ namespace Lime
                 this._scale = value;
             }
         }
+        private Vector2 _scale;
 
-        private Transform _parent;
+        /// <summary>
+        /// The parent of the Transform
+        /// Set to null if does not have parent
+        /// </summary>
         public Transform Parent
         {
             get
@@ -63,10 +76,14 @@ namespace Lime
                 this._parent = value;
             }
         }
+        private Transform _parent;
 
         private List<Transform> childern;
 
-        private Vector2 _localPosition;
+        /// <summary>
+        /// The current local position of the transform based on its parent
+        /// Set to null if does not have a parent
+        /// </summary>
         public Vector2 LocalPosition
         {
             get
@@ -78,8 +95,12 @@ namespace Lime
                 this._localPosition = value;
             }
         }
+        private Vector2 _localPosition;
 
-        private Vector2 _localRotation;
+        /// <summary>
+        /// The current local rotation of the transform based on its parent
+        /// Set to null if does not have a parent
+        /// </summary>
         public Vector2 LocalRotation
         {
             get
@@ -91,6 +112,7 @@ namespace Lime
                 this._localRotation = value;
             }
         }
+        private Vector2 _localRotation;
 
         #endregion Properties
 
@@ -122,16 +144,29 @@ namespace Lime
             this.childern = new List<Transform>();
         }
 
-        public List<Transform> GetChildern()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The Transforms that are childern to this Transform</returns>
+        public List<Transform> GetChildren()
         {
             return this.childern;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index">The index of the child</param>
+        /// <returns>The child at this index</returns>
         public Transform GetChild(int index)
         {
             return this.childern[index];
         }
 
+        /// <summary>
+        /// Rotates the the Transform by degrees
+        /// </summary>
+        /// <param name="degrees">The amount of degrees to rotate the Transform</param>
         public void Rotate(float degrees)
         {
             this.Rotation += degrees;
@@ -145,6 +180,10 @@ namespace Lime
             }
         }
 
+        /// <summary>
+        /// Sets the Transform's parent
+        /// </summary>
+        /// <param name="parent">The parent's transform</param>
         public void SetParent(Transform parent)
         {
             this.Parent = parent;
@@ -152,12 +191,17 @@ namespace Lime
 
         private void TranslateChildern(Vector2 translation)
         {
-            foreach (Transform child in GetChildern())
+            foreach (Transform child in GetChildren())
             {
                 child.Translate(translation, Space.World);
             }
         }
 
+        /// <summary>
+        /// Moves the Transform
+        /// </summary>
+        /// <param name="translation">The amount to move this Transform</param>
+        /// <param name="relativeTo">Only set to World, Self in not yet emplemeneted</param>
         public void Translate(Vector2 translation, Space relativeTo = Space.World)
         {
             Vector2 newTranslation;
@@ -176,6 +220,12 @@ namespace Lime
             TranslateChildern(newTranslation);
         }
 
+        /// <summary>
+        /// Moves the Transform
+        /// </summary>
+        /// <param name="x">The amount to move this Transform on the x axis</param>
+        /// <param name="y">The amount to move this Transform on the y axis</param>
+        /// <param name="relativeTo">Only set to World, Self in not yet emplemeneted</param>
         public void Translate(float x, float y, Space relativeTo = Space.World)
         {
             this.Translate(new Vector2(x, y), relativeTo);

@@ -9,7 +9,10 @@ namespace Lime.PseudoPhysics
 {
     public abstract class Collider : Component
     {
-        private Point _bounds;
+        /// <summary>
+        /// The rectangle that definds the bounds of the collider
+        /// Setting: only sets the width and height
+        /// </summary>
         public Rectangle Bounds
         {
             get
@@ -23,8 +26,8 @@ namespace Lime.PseudoPhysics
                 this._bounds = new Point(value.Width, value.Height);
             }
         }
+        private Point _bounds;
         
-        private Point _offset;
         /// <summary>
         /// Offsets the collider from the orgin of the collider
         /// </summary>
@@ -39,8 +42,8 @@ namespace Lime.PseudoPhysics
                 this._offset = value;
             }
         }
+        private Point _offset;
 
-        private Vector2 _lastPosition;
         protected Vector2 LastPosition
         {
             get
@@ -52,7 +55,11 @@ namespace Lime.PseudoPhysics
                 this._lastPosition = value;
             }
         }
+        private Vector2 _lastPosition;
 
+        /// <summary>
+        /// Returns whether or not if the GameObject has changed positions.
+        /// </summary>
         public bool Stale
         {
             get
@@ -61,7 +68,9 @@ namespace Lime.PseudoPhysics
             }
         }
 
-        private List<Collider> _curColliders;
+        /// <summary>
+        /// The Colliders currently colliding with this Collider
+        /// </summary>
         public List<Collider> CurColliders
         {
             get
@@ -73,13 +82,16 @@ namespace Lime.PseudoPhysics
                 this._curColliders = value;
             }
         }
+        private List<Collider> _curColliders;
 
         private List<Collider> LastColliders;
 
         private bool isLastMouseCollide;
         private bool isLastMouseDown;
 
-        private bool _trigger;
+        /// <summary>
+        /// If set to true other Colliders can pass through this Collider
+        /// </summary>
         public bool Trigger
         {
             get
@@ -91,6 +103,8 @@ namespace Lime.PseudoPhysics
                 this._trigger = value;
             }
         }
+        private bool _trigger;
+
         public Collider()
         {
             this.CurColliders = new List<Collider>();

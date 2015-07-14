@@ -9,7 +9,9 @@ namespace Lime.Animation
 {
     public class SpriteRender : Component
     {
-        private Sprite _sprite;
+        /// <summary>
+        /// The spritesheet to be used to rendered
+        /// </summary>
         public Sprite Sprite
         {
             get
@@ -21,8 +23,11 @@ namespace Lime.Animation
                 this._sprite = value;
             }
         }
+        private Sprite _sprite;
 
-        private AnimationController _animationController;
+        /// <summary>
+        /// Controls the which sprites on the spritesheet are displayed
+        /// </summary>
         public AnimationController AnimationController
         {
             get
@@ -34,8 +39,11 @@ namespace Lime.Animation
                 this._animationController = value;
             }
         }
+        private AnimationController _animationController;
 
-        private Color _color;
+        /// <summary>
+        /// The base color of the sprite
+        /// </summary>
         public Color Color
         {
             get
@@ -47,8 +55,11 @@ namespace Lime.Animation
                 this._color = value;
             }
         }
+        private Color _color;
 
-        private float _layer;
+        /// <summary>
+        /// The draw layer that the sprite appears on. Decending order.
+        /// </summary>
         public float Layer
         {
             get
@@ -60,12 +71,18 @@ namespace Lime.Animation
                 this._layer = value;
             }
         }
+        private float _layer;
 
         public SpriteRender()
         {
             this.Color = Color.White;
         }
-
+        
+        /// <summary>
+        /// DO NOT USE THIS FUNCTION!
+        /// It must be public because it inherits componet
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             if (this.AnimationController != null)
@@ -79,7 +96,7 @@ namespace Lime.Animation
             Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
             Vector2 centerOffset = new Vector2(drawSize.X / 2, drawSize.Y / 2);
             Vector2 drawPosition = this.GameObject.Transform.Position;
-            spriteBatch.Draw(Sprite.Texture2D,
+            spriteBatch.Draw(Sprite.SpriteSheet,
                 drawPosition, 
                 this.AnimationController.GetCurrentFrame(), 
                 this.Color, 

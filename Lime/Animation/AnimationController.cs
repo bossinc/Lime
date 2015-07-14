@@ -12,7 +12,9 @@ namespace Lime.Animation
 
         private int CurrentAnimationIndex;
 
-        private float _fps;
+        /// <summary>
+        /// The rate that the animations change to the next frame
+        /// </summary>
         public float FPS
         {
             get
@@ -26,6 +28,7 @@ namespace Lime.Animation
                 updateElapsedTime = 0;
             }
         }
+        private float _fps;
 
         private double updateIntervalTime;
         private double updateElapsedTime;
@@ -36,6 +39,10 @@ namespace Lime.Animation
             this.FPS = 60;
         }
 
+        /// <summary>
+        /// Adds an animation to a list of animations in this controller
+        /// </summary>
+        /// <param name="animation">The animation to be added</param>
         public void AddAnimation(Animation animation)
         {
             this.Animations.Add(animation);
@@ -53,6 +60,10 @@ namespace Lime.Animation
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A rectangle surrounding the current sprite on the spritesheet</returns>
         public Rectangle GetCurrentFrame()
         {
             return this.Animations[this.CurrentAnimationIndex].GetCurrentFrame();
@@ -73,11 +84,19 @@ namespace Lime.Animation
             }
         }
 
+        /// <summary>
+        /// Changes the animation that is being used
+        /// </summary>
+        /// <param name="index">The index of the animation to be changed to</param>
         public void ChangeAnimation(int index)
         {
             this.CurrentAnimationIndex = index;
         }
 
+        /// <summary>
+        /// Changes the animation that is being used
+        /// </summary>
+        /// <param name="name">The name of the animation to be changed to</param>
         public void ChangeAnimation(string name)
         {
             int animationsCount = this.Animations.Count;

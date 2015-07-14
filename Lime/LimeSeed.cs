@@ -23,7 +23,9 @@ namespace Lime
             ScreenResolution.SetVirtualResolution((int)(GameOptions.SCREEN_WIDTH * GameOptions.V_SCREEN_FACTOR), ((int)(GameOptions.SCREEN_HEIGHT * GameOptions.V_SCREEN_FACTOR)));
 
         }
-
+        /// <summary>
+        /// Called once per game when the game is beginning. This is where you can initialize your first scene.
+        /// </summary>
         protected abstract void CreateGame();
 
         /// <summary>
