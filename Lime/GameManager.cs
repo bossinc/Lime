@@ -71,6 +71,16 @@ namespace Lime
             updateElapsedTime = 0;
         }
 
+        public GameManager()
+        {
+            this.PseudoPhysicsManager = new PseudoPhysics.PseudoPhysicsManager();
+            this.GraphicsManager = new Animation.GraphicsManager();
+            this.InputManager = new Input.InputManager();
+            GameObjects = new List<GameObject>();
+            updateIntervalTime = 1 / GameOptions.MAX_UPDATE_FPS;
+            updateElapsedTime = 0;
+        }
+
         internal void Update(GameTime gameTime)
         {
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;

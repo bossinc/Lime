@@ -37,6 +37,7 @@ namespace Lime
         {
             this.GameManager = gameManager;
             this.Name = name;
+            Console.WriteLine("New Scene: " + name);
         }
     }
 }
