@@ -28,7 +28,7 @@ namespace Lime
             
         }
 
-        public virtual void SetGameObject(GameObject gameObject)
+        internal virtual void SetGameObject(GameObject gameObject)
         {
             this._gameObject = gameObject;
         }

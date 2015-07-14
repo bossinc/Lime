@@ -94,19 +94,21 @@ namespace Lime
         /// <summary>
         /// Adds this GameObject to the singeton of GameManager
         /// </summary>
-        public void Instantiate(Vector2 postion)
+        public static void Instantiate(GameObject gameObject, Vector2 postion)
         {
-            SetId();
-            this.Transform.Position = postion;
-            GameManager.Instance.AddGameObject(this);
-            foreach (Component component in this.Components)
+            gameObject.SetId();
+            gameObject.Transform.Position = postion;
+            GameManager.Instance.AddGameObject(gameObject);
+            foreach (Component component in gameObject.Components)
             {
                 if(component is Animation.SpriteRender)
                     GameManager.Instance.GraphicsManager.AddSpriteRender((Animation.SpriteRender)component);
                 else if(component is PseudoPhysics.Collider)
                     GameManager.Instance.PseudoPhysicsManager.AddCollider((PseudoPhysics.Collider)component);
+                component.Start();
             }
-            //this.OnCreated(this);
+            if(gameObject.OnCreated != null)
+                gameObject.OnCreated(gameObject);
         }
 
         /// <summary>

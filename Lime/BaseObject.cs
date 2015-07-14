@@ -39,10 +39,10 @@ namespace Lime
             }
             set
             {
-                if (value)
-                    this.OnEnabled(this);
-                else
-                    this.OnDisabled(this);
+                if (value && this.EOnEnabled != null)
+                    this.EOnEnabled(this);
+                else if(this.EOnDisabled != null)
+                    this.EOnDisabled(this);
                 this._enabled = value;
             }
         }
@@ -99,11 +99,11 @@ namespace Lime
 
         #region Events
 
-        public event ChangedEventHandler OnDestroy;
+        internal event ChangedEventHandler OnDestroy;
 
-        public event ChangedEventHandler OnEnabled;
+        internal event ChangedEventHandler EOnEnabled;
 
-        public event ChangedEventHandler OnDisabled;
+        internal event ChangedEventHandler EOnDisabled;
 
         #endregion Events
     }

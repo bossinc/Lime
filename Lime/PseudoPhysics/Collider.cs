@@ -99,7 +99,7 @@ namespace Lime.PseudoPhysics
             isLastMouseDown = false;
         }
 
-        public override void SetGameObject(GameObject gameObject)
+        internal override void SetGameObject(GameObject gameObject)
         {
             base.SetGameObject(gameObject);
             this.LastPosition = this.GameObject.Transform.Position;

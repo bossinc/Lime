@@ -63,7 +63,7 @@ namespace Lime.Animation
             this.Animations[this.CurrentAnimationIndex].AdvanceToNextFrame();
         }
 
-        public void Update(GameTime gameTime)
+        internal void Update(GameTime gameTime)
         {
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
             if (updateElapsedTime >= updateIntervalTime)
@@ -76,6 +76,19 @@ namespace Lime.Animation
         public void ChangeAnimation(int index)
         {
             this.CurrentAnimationIndex = index;
+        }
+
+        public void ChangeAnimation(string name)
+        {
+            int animationsCount = this.Animations.Count;
+            for (int i = 0; i < animationsCount; i++)
+            {
+                if (this.Animations[i].Name == name)
+                {
+                    ChangeAnimation(i);
+                    break;
+                }
+            }
         }
     }
 }
