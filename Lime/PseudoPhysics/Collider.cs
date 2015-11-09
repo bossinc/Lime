@@ -18,7 +18,7 @@ namespace Lime.PseudoPhysics
             get
             {
                 Point topLeftCorner = this.Offset + this.GameObject.Transform.Position.ToPoint();
-                topLeftCorner -= new Point(this._bounds.X / 2, this._bounds.Y / 2);
+                //topLeftCorner -= new Point(this._bounds.X / 2, this._bounds.Y / 2);
                 return new Rectangle(topLeftCorner, this._bounds);
             }
             set
@@ -202,7 +202,7 @@ namespace Lime.PseudoPhysics
         protected virtual void MouseUpdate()
         {
             MouseState mouseState = Mouse.GetState();
-            Point mousePosition = new Point((int)(mouseState.Position.X * GameOptions.V_SCREEN_FACTOR), (int)(mouseState.Y * GameOptions.V_SCREEN_FACTOR));
+            Point mousePosition = new Point((int)(mouseState.Position.X * GameOptions.V_SCREEN_FACTOR), (int)(mouseState.Position.Y * GameOptions.V_SCREEN_FACTOR));
             if (this.Bounds.Contains(mousePosition))
             {
                 if (isLastMouseCollide)

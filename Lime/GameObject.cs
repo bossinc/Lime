@@ -78,6 +78,7 @@ namespace Lime
 
         public GameObject()
         {
+            Console.WriteLine(this.GetType());
             this.Components = new List<Component>();
             this.Transform = new Transform(Vector2.Zero);
         }
@@ -99,18 +100,14 @@ namespace Lime
             }
         }
 
-        private void Destroy()
-        {
-            GameManager.Instance.RemoveGameObject(this);
-        }
-
         /// <summary>
         /// Adds this GameObject to the current scene
         /// </summary>
-        public static void Instantiate(GameObject gameObject, Vector2 postion)
+        public static GameObject Instantiate(GameObject gameObject, Vector2 postion)
         {
             gameObject.SetId();
             gameObject.Transform.Position = postion;
+            gameObject.AddComponent(gameObject.Transform);
             GameManager.Instance.AddGameObject(gameObject);
             foreach (Component component in gameObject.Components)
             {
@@ -118,10 +115,20 @@ namespace Lime
                     GameManager.Instance.GraphicsManager.AddSpriteRender((Animation.SpriteRender)component);
                 else if(component is PseudoPhysics.Collider)
                     GameManager.Instance.PseudoPhysicsManager.AddCollider((PseudoPhysics.Collider)component);
-                component.Start();
+                component.StartInternal();
             }
             if(gameObject.OnCreated != null)
                 gameObject.OnCreated(gameObject);
+
+            return gameObject;
+        }
+
+        /// <summary>
+        /// Adds this GameObject to the current scene
+        /// </summary>
+        public static GameObject Instantiate(GameObject gameObject)
+        {
+            return Instantiate(gameObject, gameObject.Transform.LocalPosition);
         }
 
         /// <summary>
@@ -165,7 +172,7 @@ namespace Lime
         /// <param name="component">Component to be added</param>
         public void AddComponent(Component component)
         {
-            component.SetGameObject(this);
+            component.SetGameObject((GameObject)this);
             this.Components.Add(component);
         }
 
@@ -178,9 +185,39 @@ namespace Lime
             this.Components.Remove(component);
         }
 
+        /// <summary>
+        /// Removes all components from the game associated with the object
+        /// </summary>
+        public void DestroyComponents()
+        {
+            GameManager.Instance.GraphicsManager.DeleteSpriteRender(GetComponent<Animation.SpriteRender>());
+            GameManager.Instance.PseudoPhysicsManager.DeleteCollider(GetComponent<PseudoPhysics.Collider>());
+            this.Components.Clear();
+            this.Components = new List<Component>();
+        }
+
+        public void Enable()
+        {
+            GameManager.Instance.GraphicsManager.AddSpriteRender(GetComponent<Animation.SpriteRender>());
+            GameManager.Instance.PseudoPhysicsManager.AddCollider(GetComponent<PseudoPhysics.Collider>());
+
+        }
+
+        public void Disable()
+        {
+            GameManager.Instance.GraphicsManager.DeleteSpriteRender(GetComponent<Animation.SpriteRender>());
+            GameManager.Instance.PseudoPhysicsManager.DeleteCollider(GetComponent<PseudoPhysics.Collider>());
+        }
+
+
         private GameObject GetGameObject()
         {
             return this;
+        }
+
+        public int GetComponentCount()
+        {
+            return this.Components.Count;
         }
 
         #endregion Methods

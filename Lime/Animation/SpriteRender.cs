@@ -91,13 +91,13 @@ namespace Lime.Animation
             }
         }
 
-        internal void Draw(SpriteBatch spriteBatch)
+        internal void Draw(ref SpriteBatch spriteBatch)
         {
             Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
-            Vector2 centerOffset = new Vector2(drawSize.X / 2, drawSize.Y / 2);
+            Vector2 centerOffset = Vector2.Zero;//new Vector2(drawSize.X / 2, drawSize.Y / 2);
             Vector2 drawPosition = this.GameObject.Transform.Position;
             spriteBatch.Draw(Sprite.SpriteSheet,
-                drawPosition, 
+                drawPosition,
                 this.AnimationController.GetCurrentFrame(), 
                 this.Color, 
                 this.GameObject.Transform.Rotation,

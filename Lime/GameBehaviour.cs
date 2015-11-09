@@ -17,7 +17,7 @@ namespace Lime
         /// Called when the GameBehavior is instatiated.
         /// base addes all of the events
         /// </summary>
-        public override void Start()
+        internal override void StartInternal()
         {
             Collider collider = GameObject.GetComponent<Collider>();
             collider.OnMouseEnter += OnMouseEnter;
@@ -28,7 +28,7 @@ namespace Lime
             GameObject.EOnEnabled += OnEnabled;
             GameObject.EOnDisabled += OnDisabled;
             GameObject.OnDestroy += OnDestroyed;
-            base.Start();
+            base.StartInternal();
         }
 
         /// <summary>

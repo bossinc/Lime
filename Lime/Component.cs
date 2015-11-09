@@ -28,9 +28,16 @@ namespace Lime
             
         }
 
+        internal virtual void StartInternal()
+        {
+
+            Start();
+        }
+
         internal virtual void SetGameObject(GameObject gameObject)
         {
             this._gameObject = gameObject;
+            Console.WriteLine("DSFDAS : " + GameObject.ToString());
         }
     }
 }

@@ -97,11 +97,20 @@ namespace Lime
 
         internal void AddGameObject(GameObject gameObject)
         {
+            Console.WriteLine("Game Object Added " + gameObject);
             this.GameObjects.Add(gameObject);
         }
 
         internal void RemoveGameObject(GameObject gameObject)
         {
+
+            foreach (Transform t in gameObject.Transform.GetChildren())
+            {
+                Console.WriteLine(t.ToString());
+                t.GameObject.DestroyComponents();
+                this.GameObjects.Remove(t.GameObject);
+            }
+            gameObject.DestroyComponents();
             this.GameObjects.Remove(gameObject);
         }
 

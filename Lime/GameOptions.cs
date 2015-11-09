@@ -11,17 +11,17 @@ namespace Lime
         /// <summary>
         /// Determines the rate at which to scale the virtual resolution
         /// </summary>
-        public static float V_SCREEN_FACTOR = 0.5f;
+        public static float V_SCREEN_FACTOR = 1f;
 
         /// <summary>
         /// The width of the game screen
         /// </summary>
-        public static int SCREEN_WIDTH = 800;
+        public static int SCREEN_WIDTH = 1024;
 
         /// <summary>
         /// The height of the game screen
         /// </summary>
-        public static int SCREEN_HEIGHT = 480;
+        public static int SCREEN_HEIGHT = 768;
 
         /// <summary>
         /// Not yet implemented

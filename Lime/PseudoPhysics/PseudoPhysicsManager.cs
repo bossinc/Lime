@@ -20,29 +20,45 @@ namespace Lime.PseudoPhysics
             this.Colliders.Add(collider);
         }
 
+        internal void DeleteCollider(Collider collider)
+        {
+            this.Colliders.Remove(collider);
+        }
+
         internal void Update()
         {
-            foreach (Collider collider in this.Colliders)
+            try
             {
-                collider.Update();
-                if (!collider.Stale)
+                foreach (Collider collider in this.Colliders)
                 {
-                    foreach (Collider subCollider in collider.CurColliders)
+                    collider.Update();
+                    if (!collider.Stale)
                     {
-                        if (!collider.Intersects(subCollider))
+                        foreach (Collider subCollider in collider.CurColliders)
                         {
-                            collider.RemoveCurCollider(subCollider);
+                            if (!collider.Intersects(subCollider))
+                            {
+                                collider.RemoveCurCollider(subCollider);
+                            }
                         }
-                    }
 
-                    foreach (Collider subCollider in this.Colliders)
-                    {
-                        if (collider.Intersects(subCollider))
+                        foreach (Collider subCollider in this.Colliders)
                         {
-                            collider.AddCurCollider(subCollider);
+                            if (collider.Intersects(subCollider))
+                            {
+                                collider.AddCurCollider(subCollider);
+                            }
                         }
                     }
                 }
+            }
+
+            catch (InvalidOperationException)
+            {
+            }
+            catch (NullReferenceException)
+            {
+                this.Colliders.RemoveAll(x => x == null);
             }
         }
     }

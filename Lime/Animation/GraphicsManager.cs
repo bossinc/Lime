@@ -40,6 +40,11 @@ namespace Lime.Animation
             this.SpriteRenders.Add(spriteRender);
         }
 
+        internal void DeleteSpriteRender(SpriteRender spriteRender)
+        {
+            this.SpriteRenders.Remove(spriteRender);
+        }
+
         internal void Update(GameTime gameTime)
         { 
             updateElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
@@ -62,7 +67,7 @@ namespace Lime.Animation
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, ScreenResolution.getTransformationMatrix());
             foreach (SpriteRender spriteRender in SpriteRenders)
             {
-                spriteRender.Draw(spriteBatch);
+                spriteRender.Draw(ref spriteBatch);
             }
             spriteBatch.End();
         }

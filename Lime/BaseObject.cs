@@ -71,7 +71,7 @@ namespace Lime
         /// </summary>
         /// <param name="baseObject">The object to be destroyed</param>
         /// <param name="waitTime">The amount of time to wait before destroying the object</param>
-        public void Destroy(BaseObject baseObject, double waitTime)
+        public static void Destroy(BaseObject baseObject, double waitTime)
         {
             if (waitTime <= 0)
             {
@@ -81,16 +81,16 @@ namespace Lime
                 }
                 else if (baseObject is GameObject)
                 {
-                    GameManager.Instance.RemoveGameObject((GameObject)baseObject);
+                    GameManager.Instance.RemoveGameObject(baseObject as GameObject);
                 }
                 else
                 {
                     throw new System.Exception("Cannot destroy " + baseObject.GetType().ToString());
                 }
-                this.OnDestroy(this);
+                //baseObject.OnDestroy(baseObject);
             }
             else
-                destroyWaitTime = waitTime;
+                baseObject.destroyWaitTime = waitTime;
         }
 
         /// <summary>
