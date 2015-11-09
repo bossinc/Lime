@@ -103,12 +103,10 @@ namespace Lime
 
         internal void RemoveGameObject(GameObject gameObject)
         {
-
+            Console.WriteLine("Game Object Removed " + gameObject);
             foreach (Transform t in gameObject.Transform.GetChildren())
             {
-                Console.WriteLine(t.ToString());
-                t.GameObject.DestroyComponents();
-                this.GameObjects.Remove(t.GameObject);
+                RemoveGameObject(t.GameObject);
             }
             gameObject.DestroyComponents();
             this.GameObjects.Remove(gameObject);

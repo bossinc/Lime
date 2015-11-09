@@ -155,15 +155,18 @@ namespace Lime.PseudoPhysics
 
         internal void Update()
         {
-            CollisionUpdate();
-            TriggerUpdate();
-            MouseUpdate();
+            if (this.Enabled)
+            {
+                CollisionUpdate();
+                TriggerUpdate();
+                MouseUpdate();
 
-            this.LastColliders = null;
-            this.LastColliders = new List<Collider>();
-            this.LastColliders.AddRange(CurColliders);
+                this.LastColliders = null;
+                this.LastColliders = new List<Collider>();
+                this.LastColliders.AddRange(CurColliders);
 
-            this.LastPosition = this.GameObject.Transform.Position;
+                this.LastPosition = this.GameObject.Transform.Position;
+            }
         }
 
         protected virtual void CollisionUpdate()

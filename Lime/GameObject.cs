@@ -105,8 +105,16 @@ namespace Lime
         /// </summary>
         public static GameObject Instantiate(GameObject gameObject, Vector2 postion)
         {
-            gameObject.SetId();
             gameObject.Transform.Position = postion;
+            return Instantiate(gameObject);
+        }
+
+        /// <summary>
+        /// Adds this GameObject to the current scene
+        /// </summary>
+        public static GameObject Instantiate(GameObject gameObject)
+        {
+            gameObject.SetId();
             gameObject.AddComponent(gameObject.Transform);
             GameManager.Instance.AddGameObject(gameObject);
             foreach (Component component in gameObject.Components)
@@ -121,14 +129,6 @@ namespace Lime
                 gameObject.OnCreated(gameObject);
 
             return gameObject;
-        }
-
-        /// <summary>
-        /// Adds this GameObject to the current scene
-        /// </summary>
-        public static GameObject Instantiate(GameObject gameObject)
-        {
-            return Instantiate(gameObject, gameObject.Transform.LocalPosition);
         }
 
         /// <summary>
@@ -196,17 +196,30 @@ namespace Lime
             this.Components = new List<Component>();
         }
 
-        public void Enable()
+        internal void Enable()
         {
-            GameManager.Instance.GraphicsManager.AddSpriteRender(GetComponent<Animation.SpriteRender>());
-            GameManager.Instance.PseudoPhysicsManager.AddCollider(GetComponent<PseudoPhysics.Collider>());
-
+            Console.WriteLine(this.ToString() + " is Enabled");
+            foreach (Component c in this.Components)
+            {
+                c.Enabled = true;
+            }
+            foreach (Transform t in this.Transform.GetChildren())
+            {
+                t.GameObject.Enable();
+            }
         }
 
-        public void Disable()
+        internal void Disable()
         {
-            GameManager.Instance.GraphicsManager.DeleteSpriteRender(GetComponent<Animation.SpriteRender>());
-            GameManager.Instance.PseudoPhysicsManager.DeleteCollider(GetComponent<PseudoPhysics.Collider>());
+            Console.WriteLine(this.ToString() + " is Disabled");
+            foreach (Component c in this.Components)
+            {
+                c.Enabled = false;
+            }
+            foreach (Transform t in this.Transform.GetChildren())
+            {
+                t.GameObject.Disable();
+            }
         }
 
 

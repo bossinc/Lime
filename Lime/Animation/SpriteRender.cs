@@ -85,7 +85,7 @@ namespace Lime.Animation
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            if (this.AnimationController != null)
+            if (this.AnimationController != null && this.Enabled)
             {
                 this.AnimationController.Update(gameTime);
             }
@@ -93,18 +93,21 @@ namespace Lime.Animation
 
         internal void Draw(ref SpriteBatch spriteBatch)
         {
-            Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
-            Vector2 centerOffset = Vector2.Zero;//new Vector2(drawSize.X / 2, drawSize.Y / 2);
-            Vector2 drawPosition = this.GameObject.Transform.Position;
-            spriteBatch.Draw(Sprite.SpriteSheet,
-                drawPosition,
-                this.AnimationController.GetCurrentFrame(), 
-                this.Color, 
-                this.GameObject.Transform.Rotation,
-                centerOffset, 
-                this.GameObject.Transform.Scale,
-                SpriteEffects.None, 
-                this.Layer);
+            if (this.Enabled)
+            {
+                Point drawSize = new Point(this.AnimationController.GetCurrentFrame().Width, this.AnimationController.GetCurrentFrame().Height);
+                Vector2 centerOffset = Vector2.Zero;//new Vector2(drawSize.X / 2, drawSize.Y / 2);
+                Vector2 drawPosition = this.GameObject.Transform.Position;
+                spriteBatch.Draw(Sprite.SpriteSheet,
+                    drawPosition,
+                    this.AnimationController.GetCurrentFrame(),
+                    this.Color,
+                    this.GameObject.Transform.Rotation,
+                    centerOffset,
+                    this.GameObject.Transform.Scale,
+                    SpriteEffects.None,
+                    this.Layer);
+            }
         }
     }
 }

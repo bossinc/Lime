@@ -46,10 +46,20 @@ namespace Lime
             }
             set
             {
-                if (value && this.EOnEnabled != null)
-                    this.EOnEnabled(this);
-                else if(this.EOnDisabled != null)
-                    this.EOnDisabled(this);
+                if (value)
+                {
+                    if (this.EOnEnabled != null)
+                        this.EOnEnabled(this);
+                    if (this is GameObject)
+                        ((GameObject)this).Enable();
+                }
+                else
+                {
+                    if (this.EOnDisabled != null)
+                        this.EOnDisabled(this);
+                    if (this is GameObject)
+                        ((GameObject)this).Disable();
+                }
                 this._enabled = value;
             }
         }
@@ -59,6 +69,7 @@ namespace Lime
 
         public BaseObject()
         {
+            _enabled = true;
         }
 
         protected void SetId()
@@ -102,7 +113,7 @@ namespace Lime
             if (destroyWaitTime > 0)
             {
                 destroyWaitTime -= gameTime.ElapsedGameTime.TotalSeconds;
-                if(destroyWaitTime <= 0)
+                if (destroyWaitTime <= 0)
                     Destroy(this, 0);
             }
         }
