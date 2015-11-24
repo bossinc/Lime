@@ -198,7 +198,7 @@ namespace Lime
 
         internal void Enable()
         {
-            Console.WriteLine(this.ToString() + " is Enabled");
+            //Console.WriteLine(this.ToString() + " is Enabled");
             foreach (Component c in this.Components)
             {
                 c.Enabled = true;
@@ -211,7 +211,7 @@ namespace Lime
 
         internal void Disable()
         {
-            Console.WriteLine(this.ToString() + " is Disabled");
+            //Console.WriteLine(this.ToString() + " is Disabled");
             foreach (Component c in this.Components)
             {
                 c.Enabled = false;

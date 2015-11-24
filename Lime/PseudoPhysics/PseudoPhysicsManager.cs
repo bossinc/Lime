@@ -9,30 +9,35 @@ namespace Lime.PseudoPhysics
     internal sealed class PseudoPhysicsManager
     {
         private List<Collider> Colliders;
+        private List<Collider> toAdd;
+        private List<Collider> removeFrom;
 
         public PseudoPhysicsManager()
         {
             this.Colliders = new List<Collider>();
+            this.toAdd = new List<Collider>();
+            this.removeFrom = new List<Collider>();
         }
 
         internal void AddCollider(Collider collider)
         {
-            this.Colliders.Add(collider);
+            this.toAdd.Add(collider);
         }
 
         internal void DeleteCollider(Collider collider)
         {
-            Console.WriteLine("HELLO" + this.Colliders.Count);
-            this.Colliders.Remove(collider);
-            Console.WriteLine("HELLO" + this.Colliders.Count);
+            this.removeFrom.Remove(collider);
         }
 
         internal void Update()
         {
+            List<GameObject> deleteGOs = new List<GameObject>();
             //Console.WriteLine("HELLO" + this.Colliders.Count);
             foreach (Collider collider in this.Colliders)
             {
                 collider.Update();
+
+
                 //if (!collider.Stale)
                 //{
                 //    foreach (Collider subCollider in collider.CurColliders)
@@ -52,6 +57,17 @@ namespace Lime.PseudoPhysics
                 //    }
                 //}
             }
+
+            foreach (Collider c in this.removeFrom)
+            {
+                this.Colliders.Remove(c);
+            }
+            this.removeFrom.Clear();
+            foreach (Collider c in this.toAdd)
+            {
+                this.Colliders.Add(c);
+            }
+            this.toAdd.Clear();
         }
     }
 }

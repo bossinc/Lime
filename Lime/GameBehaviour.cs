@@ -20,14 +20,18 @@ namespace Lime
         internal override void StartInternal()
         {
             Collider collider = GameObject.GetComponent<Collider>();
-            collider.OnMouseEnter += OnMouseEnter;
-            collider.OnMouseOver += OnMouseOver;
-            collider.OnMouseUp += OnMouseUp;
-            collider.OnMouseDown += OnMouseDown;
-            collider.OnMouseExit += OnMouseExit;
+            if (collider != null)
+            {
+                collider.OnMouseEnter += OnMouseEnter;
+                collider.OnMouseOver += OnMouseOver;
+                collider.OnMouseUp += OnMouseUp;
+                collider.OnMouseDown += OnMouseDown;
+                collider.OnMouseExit += OnMouseExit;
+            }
             GameObject.EOnEnabled += OnEnabled;
             GameObject.EOnDisabled += OnDisabled;
             GameObject.OnDestroy += OnDestroyed;
+
             base.StartInternal();
         }
 

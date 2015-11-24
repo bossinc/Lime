@@ -105,6 +105,7 @@ namespace Lime.PseudoPhysics
         }
         private bool _trigger;
 
+
         public Collider()
         {
             this.CurColliders = new List<Collider>();
