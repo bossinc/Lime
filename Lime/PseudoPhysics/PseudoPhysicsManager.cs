@@ -12,7 +12,7 @@ namespace Lime.PseudoPhysics
         private List<Collider> toAdd;
         private List<Collider> removeFrom;
 
-        public PseudoPhysicsManager()
+        internal PseudoPhysicsManager()
         {
             this.Colliders = new List<Collider>();
             this.toAdd = new List<Collider>();

@@ -61,7 +61,7 @@ namespace Lime
         private double updateIntervalTime;
         private double updateElapsedTime;
 
-        public GameManager(PseudoPhysics.PseudoPhysicsManager pseudoPhysicsManager, Animation.GraphicsManager graphicsManager, Input.InputManager inputManager)
+        internal GameManager(PseudoPhysics.PseudoPhysicsManager pseudoPhysicsManager, Animation.GraphicsManager graphicsManager, Input.InputManager inputManager)
         {
             this.PseudoPhysicsManager = pseudoPhysicsManager;
             this.GraphicsManager = graphicsManager;
@@ -71,7 +71,7 @@ namespace Lime
             updateElapsedTime = 0;
         }
 
-        public GameManager()
+        internal GameManager()
         {
             this.PseudoPhysicsManager = new PseudoPhysics.PseudoPhysicsManager();
             this.GraphicsManager = new Animation.GraphicsManager();

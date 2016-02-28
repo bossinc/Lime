@@ -28,7 +28,7 @@ namespace Lime.Input
             }
         }
 
-        public InputManager()
+        internal InputManager()
         {
             this.InputKeys = new List<InputKey>();
         }

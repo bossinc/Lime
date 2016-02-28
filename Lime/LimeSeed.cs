@@ -6,7 +6,7 @@ using System;
 namespace Lime
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// This is the main loop for your game.
     /// </summary>
     public abstract class LimeSeed : Game
     {
